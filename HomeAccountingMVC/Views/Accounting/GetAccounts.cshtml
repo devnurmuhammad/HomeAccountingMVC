@@ -17,17 +17,18 @@
             <th> </th>
         </tr>
     </thead>
+
     <tbody>
-        @foreach(var student in Model)
+        @foreach (var account in Model)
         {
             <tr>
-                <td>@student.ID</td>
-                <td>@student.Firstname</td>
-                <td>@student.Username</td>
-                <td>@student.Password</td>
-                <td>@student.Email</td>
+                <td>@account.ID</td>
+                <td>@account.Firstname</td>
+                <td>@account.Username</td>
+                <td>@account.Password</td>
+                <td>@account.Email</td>
                 <td>
-                    <a>Edit</a>
+                    <a class="btn btn-primary" asp-controller="Accounting" asp-action="Update" asp-route-id="@account.ID">Edit</a>
                 </td>
             </tr>
         }
