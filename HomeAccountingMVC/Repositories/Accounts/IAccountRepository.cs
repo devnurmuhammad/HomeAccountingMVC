@@ -7,7 +7,8 @@ namespace HomeAccountingMVC.Repositories.Accounts
         bool Create(Account account);
         Task<IList<Account>> GetAllAsync();
         Account Update(Account account);
-        bool Delete(string username);
+        bool Delete(int id);
         Account GetByUsername(string username);
+        Account GetByID(int id);
     }
 }

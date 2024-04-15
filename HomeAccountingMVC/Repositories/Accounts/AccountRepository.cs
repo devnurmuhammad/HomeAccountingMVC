@@ -21,16 +21,13 @@ namespace HomeAccountingMVC.Repositories.Accounts
             return result > 0;
         }
 
-        public bool Delete(string username)
+        public bool Delete(int id)
         {
-            Account? account = _context.Accounts.FirstOrDefault(x => x.Username == username);
-            if (account != null)
-            {
-                _context.Accounts.Remove(account);
-                _context.SaveChanges();
-                return true;
-            }
-            return false;
+            Account? account = _context.Accounts.FirstOrDefault(x => x.ID == id);
+            _context.Accounts.Remove(account);
+            int result = _context.SaveChanges();
+
+            return result > 0;
         }
 
         public async Task<IList<Account>> GetAllAsync()
@@ -40,14 +37,18 @@ namespace HomeAccountingMVC.Repositories.Accounts
             return accounts;
         }
 
+        public Account GetByID(int id)
+        {
+            Account? account = _context.Accounts.Find(id);
+
+            return account;
+        }
+
         public Account GetByUsername(string username)
         {
             Account? account = _context.Accounts.FirstOrDefault(x => x.Username == username);
-            if (account != null)
-            {
-                return account;
-            }
-            throw new Exception("Not f");
+           
+            return account;
         }
 
         public Account Update(Account account)
