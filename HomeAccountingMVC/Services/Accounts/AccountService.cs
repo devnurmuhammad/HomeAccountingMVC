@@ -1,5 +1,4 @@
-﻿using HomeAccountingMVC.DTOs;
-using HomeAccountingMVC.Entities;
+﻿using HomeAccountingMVC.Entities;
 using HomeAccountingMVC.Models;
 using HomeAccountingMVC.Repositories.Accounts;
 
@@ -25,13 +24,18 @@ namespace HomeAccountingMVC.Services.Accounts
             };
 
             bool result = _repository.Create(account);
-         
+
             return result;
         }
 
-        public bool Delete(string username, AccountDTO accountDTO)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool result = _repository.Delete(id);
+            if (result)
+            {
+                return true;
+            }
+            throw new Exception("Not found");
         }
 
         public async Task<IList<Account>> GetAllAsync()
@@ -41,14 +45,40 @@ namespace HomeAccountingMVC.Services.Accounts
             return accounts;
         }
 
-        public Account GetByUsername(string username)
+        public Account GetByID(int id)
         {
-            throw new NotImplementedException();
+            Account account = _repository.GetByID(id);
+
+            if (account is not null)
+            {
+                return account;
+            }
+            throw new Exception("not found");
         }
 
-        public Account Update(string username, AccountDTO accountDTO)
+        public Account GetByUsername(string username)
         {
-            throw new NotImplementedException();
+            Account account = _repository.GetByUsername(username);
+
+            return account;
+        }
+
+        public Account Update(Account accountDTO)
+        {
+            Account account = _repository.GetByID(accountDTO.ID);
+            if (account is not null)
+            {
+                account.Firstname = accountDTO.Firstname;
+                account.Email = accountDTO.Email;
+                account.Username = accountDTO.Username;
+                account.Password = accountDTO.Password;
+
+                _repository.Update(account);
+
+                return account;
+            }
+
+            throw new Exception("not found");
         }
     }
 }
