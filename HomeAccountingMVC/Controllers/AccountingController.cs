@@ -53,7 +53,7 @@ namespace HomeAccountingMVC.Controllers
         [HttpPost]
         public IActionResult Update(Account account)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _accountService.Update(account);
 
