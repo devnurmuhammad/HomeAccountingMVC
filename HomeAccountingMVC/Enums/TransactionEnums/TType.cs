@@ -1,8 +1,11 @@
-﻿namespace HomeAccountingMVC.Enums.TransactionEnums
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HomeAccountingMVC.Enums.TransactionEnums
 {
     public enum TType
     {
-        Income,
+        [Display(Name = "Income")]
+        Income = 1,
         Outcome,
     }
 }
