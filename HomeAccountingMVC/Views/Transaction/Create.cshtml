@@ -1,0 +1,50 @@
+﻿@using HomeAccountingMVC.Enums.TransactionEnums
+@using HomeAccountingMVC.Services.Categories
+
+@model CreateTransactionViewModel
+@inject ICategoryService CategoryService
+
+<h1>Transactions</h1>
+
+@{
+    var res = CategoryService.GetAllAsync().Result;
+}
+
+<form method="post">
+    <div class="mt-3">
+        <label class="form-label">Type</label>
+        @* <select name="types" id="types" asp-for="Type">
+            <option value="@TType.Income">@Enum.GetName(TType.Income)</option>
+            <option value="@TType.Outcome">Outcome</option>
+        </select> *@
+        <select asp-for="Type" asp-items="ViewBag.DropdownData as IEnumerable<SelectListItem>">
+            <option value="qwerty">Select an option</option>
+        </select>
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Category</label>
+        <select name="cars" id="cars" asp-for="CategoryID">
+            @{
+                foreach (var item in res)
+                {
+                    <option value="@item.ID">@item.Name</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Sum</label>
+        <input type="text" class="form-control" asp-for="Sum" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Comment</label>
+        <input type="text" class="form-control" asp-for="Comment" />
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>
