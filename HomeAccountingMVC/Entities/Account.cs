@@ -11,6 +11,6 @@ namespace HomeAccountingMVC.Entities
         [Required]
         public required string Password { get; set; }
         public string? Email { get; set; }
-        public ICollection<Transaction> Transactions { get; set; }
+        public ICollection<Transaction>? Transactions { get; set; }
     }
 }
