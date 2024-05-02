@@ -1,13 +1,10 @@
 using HomeAccountingMVC.Db_Context;
-using HomeAccountingMVC.Repositories.Accounts;
-using HomeAccountingMVC.Services.Accounts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-builder.Services.AddScoped<IAccountService, AccountService>();
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
